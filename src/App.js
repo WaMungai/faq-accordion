@@ -1,32 +1,28 @@
 import { useState } from "react";
-import mobile from "./images/background-pattern-mobile.svg";
-import desktop from "./images/background-pattern-desktop.svg";
+import bgMobile from "./images/background-pattern-mobile.svg";
+import bgDesktop from "./images/background-pattern-desktop.svg";
 import SingleQuestion from "./components/SingleQuestion";
 import { questions } from "./components/questions";
 import './index.css'
 
 function App() {
-  const [quests] = useState(questions);
+  const [isShowing,setIsShowing] = useState(false);
 
   return (
-    <div className="container">
-      <article>
-        <picture>
-          <source media="(min-width:68) " srcSet={desktop} />
-          <img src={mobile} alt="" />
-        </picture>
-      </article>
-      <article>
-        <h1>FAQ</h1>
-        {quests.map((quest, index) => (
-          <SingleQuestion
-            key={index}
-            question={quest.question}
-            answer={quest.answer}
-          />
-        ))}
-      </article>
+   <section>
+    <picture>
+      <source media="(min-width:640px" srcSet={bgDesktop} />
+      <img src={bgMobile} alt="" />
+    </picture>
+    <div>
+      {questions.map((question,index) =>(
+        <article key={index}>
+          <h2>{question.question}</h2>
+          <p>{question.answer}</p>
+        </article>
+      ))}
     </div>
+   </section>
   );
 }
 
